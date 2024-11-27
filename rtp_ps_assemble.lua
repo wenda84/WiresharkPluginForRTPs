@@ -423,7 +423,8 @@ do
         -- local frame_seqs = frame_num()
         -- if (frame_seqs.value == 1)
         
-        if pinfo.visited == false then
+        -- if pinfo.visited == false then    // zwd modify. 实测目前的wireshark版本(4.x),completeRTP需要每次计算
+        if (completeRTP[pinfo.number] == nil) then
             if (is_ps_header(tvb, 0)) then
                 tempArray = nil
             end
@@ -442,7 +443,7 @@ do
             end
             lastNumber = pinfo.number
 
-            return
+            -- return // zwd modify. 实测目前的wireshark版本(4.x),completeRTP需要每次计算
         end
 
         -- add proto item to tree
